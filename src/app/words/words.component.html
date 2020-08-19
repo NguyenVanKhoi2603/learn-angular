@@ -1,0 +1,65 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div *ngIf="isShow">
+                <input type="text" placeholder="Enter English" [(ngModel)]="newEn">
+                <br><br>
+                <input placeholder="Enter Viet Nam" [(ngModel)]="newVn">
+                <br><br>
+                <button class="btn btn-primary padding_for" (click)="addWord();">Submit</button>
+                <button class="btn btn-warning padding_for" (click)="isShow = !isShow">Cancel</button>
+            </div>
+            <button class="btn btn-info" (click)="isShow = !isShow" *ngIf="!isShow">Add news</button>
+        </div>
+        <div class="col-md-8">
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label for="sel1">Select list:</label>
+                    <select [(ngModel)]="filterStatus" class="form-control" id="sel1">
+                        <option>Display all</option>
+                        <option>Displays memorized</option>
+                        <option>Displays dont remember</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">English</th>
+                        <th scope="col">Vietnames</th>
+                        <th scope="col">Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let word of arrWords">
+                        <th *ngIf="getShowStatus(word.memorized)" scope="row">{{  word.id }}</th>
+                        <td *ngIf="getShowStatus(word.memorized)" [ngStyle]="{ color: word.memorized? 'green' : 'red'}">
+                            {{ word.en }}</td>
+                        <td *ngIf="getShowStatus(word.memorized)">{{ word.vn }}</td>
+                        <td *ngIf="getShowStatus(word.memorized)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button (click)="deleteWord(word.id);" type="button"
+                                        class="btn btn-danger padding_for">Delete</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button (click)="word.memorized = !word.memorized" type="button"
+                                        class="btn btn-success">
+                                        {{ word.memorized ? 'Dont Remember' : 'Remembered' }}
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
