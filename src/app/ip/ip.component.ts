@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class IpComponent implements OnInit {
   configUrl = 'http://ip.jsontest.com/';
   ssdfds = 'ddd';
+  brank = 'sdfsdf';
   constructor(private http: HttpClientModule) {
 
     
